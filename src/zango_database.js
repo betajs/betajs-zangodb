@@ -36,17 +36,15 @@ Scoped.define("module:ZangoDatabase", [
             },
 
             _ensureIndex: function(tableName, key) {
-                if (this._config[tableName] && this._config[tableName][key])
-                    return;
-                this._config[tableName] = this._config[tableName] || {};
-                this._config[tableName][key] = true;
+                this._config[tableName] = this._config[tableName] || [];
+                this._config[tableName].push(key);
                 this._unbind();
             },
 
             _getTable: function(tableName) {
                 if (!this._config[tableName]) {
                     this._unbind();
-                    this._config[tableName] = {};
+                    this._config[tableName] = [];
                 }
                 this._bind();
                 return this._zangodb.collection(tableName);

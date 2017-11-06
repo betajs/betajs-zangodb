@@ -21,12 +21,13 @@ module.exports = function(grunt) {
 		.uglifyTask('uglify-scoped', 'dist/' + dist + '.js', 'dist/' + dist + '.min.js')
 		.packageTask()
         .jsbeautifyTask(null, "src/*.js")
-        .browserqunitTask(null, "tests/tests.html")
+        .browserqunitTask(null, "tests/tests.html", true)
+        .browserqunitTask("benchmarks", "benchmarks/compare.html", true)
 
 		/* Testing */
 		.closureTask(null, [require.resolve("betajs-scoped"), require.resolve("betajs"), require.resolve("betajs-data"), "./dist/betajs-sql-noscoped.js"])
 		.lintTask(null, ['./src/**/*.js', './dist/' + dist + '-noscoped.js', './dist/' + dist + '.js', './Gruntfile.js', './tests/**/*.js'])
-        .githookTask(null, "pre-commit", "check")
+        .githookTask(null, "pre-commit", "check-node")
 
 		/* External Configurations */
 		.codeclimateTask()

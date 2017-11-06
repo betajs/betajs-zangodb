@@ -5,3 +5,4 @@
 node_modules
 docs
 *.log
+package-lock.json

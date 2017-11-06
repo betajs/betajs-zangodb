@@ -1,4 +1,4 @@
-# betajs-zangodb 0.0.1
+# betajs-zangodb 0.0.2
 [![Code Climate](https://codeclimate.com/github/betajs/betajs-zangodb/badges/gpa.svg)](https://codeclimate.com/github/betajs/betajs-zangodb)
 [![NPM](https://img.shields.io/npm/v/betajs-zangodb.svg?style=flat)](https://www.npmjs.com/package/betajs-zangodb)
 

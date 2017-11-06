@@ -1,10 +1,10 @@
 /*!
-betajs-zangodb - v0.0.1 - 2017-07-26
+betajs-zangodb - v0.0.2 - 2017-11-05
 Copyright (c) Oliver Friedmann
 Apache-2.0 Software License.
 */
 /** @flow **//*!
-betajs-scoped - v0.0.16 - 2017-07-23
+betajs-scoped - v0.0.17 - 2017-10-22
 Copyright (c) Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -16,7 +16,7 @@ var Globals = (function () {
  * @module Globals
  * @access private
  */
-return { 
+return {
 		
 	/**
 	 * Returns the value of a global variable.
@@ -26,11 +26,11 @@ return {
 	 */
 	get : function(key/* : string */) {
 		if (typeof window !== "undefined")
-			return window[key];
+			return key ? window[key] : window;
 		if (typeof global !== "undefined")
-			return global[key];
+			return key ? global[key] : global;
 		if (typeof self !== "undefined")
-			return self[key];
+			return key ? self[key] : self;
 		return undefined;
 	},
 
@@ -64,6 +64,8 @@ return {
 	 * Globals.getPath("foo.bar")
 	 */
 	getPath: function (path/* : string */) {
+		if (!path)
+			return this.get();
 		var args = path.split(".");
 		if (args.length == 1)
 			return this.get(path);		
@@ -965,7 +967,7 @@ var Public = Helper.extend(rootScope, (function () {
 return {
 		
 	guid: "4b6878ee-cb6a-46b3-94ac-27d91f58d666",
-	version: '0.0.16',
+	version: '0.0.17',
 		
 	upgrade: Attach.upgrade,
 	attach: Attach.attach,
@@ -1007,7 +1009,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-zangodb - v0.0.1 - 2017-07-26
+betajs-zangodb - v0.0.2 - 2017-11-05
 Copyright (c) Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1020,7 +1022,7 @@ Scoped.binding('data', 'global:BetaJS.Data');
 Scoped.define("module:", function () {
 	return {
     "guid": "1f4fd098-7b39-4f33-8638-585484cbe503",
-    "version": "0.0.1"
+    "version": "0.0.2"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1124,17 +1126,15 @@ Scoped.define("module:ZangoDatabase", [
             },
 
             _ensureIndex: function(tableName, key) {
-                if (this._config[tableName] && this._config[tableName][key])
-                    return;
-                this._config[tableName] = this._config[tableName] || {};
-                this._config[tableName][key] = true;
+                this._config[tableName] = this._config[tableName] || [];
+                this._config[tableName].push(key);
                 this._unbind();
             },
 
             _getTable: function(tableName) {
                 if (!this._config[tableName]) {
                     this._unbind();
-                    this._config[tableName] = {};
+                    this._config[tableName] = [];
                 }
                 this._bind();
                 return this._zangodb.collection(tableName);
