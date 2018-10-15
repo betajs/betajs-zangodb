@@ -1,5 +1,5 @@
 {
-    "homepage": "http://betajs.com",
+    "homepage": "https://betajs.com",
     "license": "Apache-2.0",
     "licenses": [
         {
@@ -52,8 +52,8 @@
     },
     "main": "dist/betajs-zangodb.js",
     "meta": {
-        "blog": "http://blog.betajs.com",
-        "twitter": "http://twitter.com/thebetajs",
+        "blog": "https://blog.betajs.com",
+        "twitter": "https://twitter.com/thebetajs",
         "guid": "1f4fd098-7b39-4f33-8638-585484cbe503",
         "installdoc": "docsrc/common/install.md",
         "summarydoc": "docsrc/common/summary.md",

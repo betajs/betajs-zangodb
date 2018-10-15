@@ -7,10 +7,10 @@ Scoped.define("module:ZangoDatabase", [
     }, function(inherited) {
         return {
 
-            constructor: function(db) {
+            constructor: function(db, tables) {
                 inherited.constructor.call(this);
                 this._db = db;
-                this._config = {};
+                this._config = tables || {};
                 this._zangodb = null;
             },
 
