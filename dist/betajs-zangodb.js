@@ -1,5 +1,5 @@
 /*!
-betajs-zangodb - v0.0.2 - 2018-10-15
+betajs-zangodb - v0.0.2 - 2018-10-16
 Copyright (c) Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1006,7 +1006,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-zangodb - v0.0.2 - 2018-10-15
+betajs-zangodb - v0.0.2 - 2018-10-16
 Copyright (c) Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1020,7 +1020,7 @@ Scoped.define("module:", function () {
 	return {
     "guid": "1f4fd098-7b39-4f33-8638-585484cbe503",
     "version": "0.0.2",
-    "datetime": 1539631422334
+    "datetime": 1539741042516
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1088,8 +1088,9 @@ Scoped.define("module:ZangoDatabaseTable", [
 });
 Scoped.define("module:ZangoDatabase", [
     "data:Databases.Database",
+    "base:Promise",
     "module:ZangoDatabaseTable"
-], function(Database, ZangoDatabaseTable, scoped) {
+], function(Database, Promise, ZangoDatabaseTable, scoped) {
     return Database.extend({
         scoped: scoped
     }, function(inherited) {
@@ -1136,6 +1137,21 @@ Scoped.define("module:ZangoDatabase", [
                 }
                 this._bind();
                 return this._zangodb.collection(tableName);
+            },
+
+            deleteDatabase: function() {
+                var req = indexedDB.deleteDatabase(this._db);
+                var promise = Promise.create();
+                req.onsuccess = function() {
+                    promise.asyncSuccess(true);
+                };
+                req.onerror = function() {
+                    promise.asyncError("Couldn't delete database");
+                };
+                req.onblocked = function() {
+                    promise.asyncError("Couldn't delete database due to the operation being blocked");
+                };
+                return promise;
             }
 
         };

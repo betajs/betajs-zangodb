@@ -1,7 +1,8 @@
 Scoped.define("module:ZangoDatabase", [
     "data:Databases.Database",
+    "base:Promise",
     "module:ZangoDatabaseTable"
-], function(Database, ZangoDatabaseTable, scoped) {
+], function(Database, Promise, ZangoDatabaseTable, scoped) {
     return Database.extend({
         scoped: scoped
     }, function(inherited) {
@@ -48,6 +49,21 @@ Scoped.define("module:ZangoDatabase", [
                 }
                 this._bind();
                 return this._zangodb.collection(tableName);
+            },
+
+            deleteDatabase: function() {
+                var req = indexedDB.deleteDatabase(this._db);
+                var promise = Promise.create();
+                req.onsuccess = function() {
+                    promise.asyncSuccess(true);
+                };
+                req.onerror = function() {
+                    promise.asyncError("Couldn't delete database");
+                };
+                req.onblocked = function() {
+                    promise.asyncError("Couldn't delete database due to the operation being blocked");
+                };
+                return promise;
             }
 
         };
