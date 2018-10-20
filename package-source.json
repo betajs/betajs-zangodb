@@ -5,6 +5,7 @@
 	"contributors": ["Oliver Friedmann"],
 	"devDependencies": {
 		"lodash": "",
+		"qunitjs": "^2.4.1",
 		"grunt": "",
 		"grunt-contrib-jshint": "",
 		"grunt-contrib-concat": "",

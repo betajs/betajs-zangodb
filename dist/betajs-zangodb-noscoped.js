@@ -1,5 +1,5 @@
 /*!
-betajs-zangodb - v0.0.2 - 2018-10-16
+betajs-zangodb - v0.0.2 - 2018-10-21
 Copyright (c) Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -13,7 +13,7 @@ Scoped.define("module:", function () {
 	return {
     "guid": "1f4fd098-7b39-4f33-8638-585484cbe503",
     "version": "0.0.2",
-    "datetime": 1539741042516
+    "datetime": 1540075663578
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -69,7 +69,9 @@ Scoped.define("module:ZangoDatabaseTable", [
                 result = result.limit(options.limit);
             return Promise.funcCallback(result, result.toArray).mapSuccess(function(cols) {
                 return new ArrayIterator(cols);
-            }, this);
+            }, this).error(function(e) {
+                console.warn(e);
+            });
         },
 
         ensureIndex: function(key) {
@@ -133,21 +135,28 @@ Scoped.define("module:ZangoDatabase", [
             },
 
             deleteDatabase: function() {
-                var req = indexedDB.deleteDatabase(this._db);
-                var promise = Promise.create();
-                req.onsuccess = function() {
-                    promise.asyncSuccess(true);
-                };
-                req.onerror = function() {
-                    promise.asyncError("Couldn't delete database");
-                };
-                req.onblocked = function() {
-                    promise.asyncError("Couldn't delete database due to the operation being blocked");
-                };
-                return promise;
+                this._unbind();
+                return this.cls.deleteDatabase(this._db);
             }
 
         };
+
+    }, {
+
+        deleteDatabase: function(db) {
+            var req = indexedDB.deleteDatabase(db);
+            var promise = Promise.create();
+            req.onsuccess = function() {
+                promise.asyncSuccess(true);
+            };
+            req.onerror = function() {
+                promise.asyncError("Couldn't delete database");
+            };
+            req.onblocked = function() {
+                promise.asyncError("Couldn't delete database due to the operation being blocked");
+            };
+            return promise;
+        }
 
     });
 });

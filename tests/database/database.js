@@ -23,3 +23,42 @@ QUnit.test("zango database store", function (assert) {
         });
     });
 });
+
+
+/*
+QUnit.test("zango database $regex test", function (assert) {
+    var done = assert.async();
+    var db = new BetaJS.Data.Databases.Zango.ZangoDatabase("betajszangodb");
+    db.getTable("tests").clear().success(function () {
+        db.getTable("tests").insertRow({foo: "barbaz"}).success(function (object) {
+            db.getTable("tests").findOne({
+                foo: {$regex: "arba"}
+            }).success(function (result) {
+                assert.equal(result._id, object.id);
+                done();
+            });
+        });
+    });
+});
+
+
+QUnit.test("zango database $elemMatch test", function (assert) {
+    var done = assert.async();
+    var db = new BetaJS.Data.Databases.Zango.ZangoDatabase("betajszangodb");
+    db.getTable("tests").clear().success(function () {
+        db.getTable("tests").insertRow({foo: ["bar", "baz"]}).success(function (object) {
+            assert.ok(!!object._id);
+            assert.equal(typeof object._id, "string");
+            assert.deepEqual(object.foo, ["bar", "baz"]);
+            db.getTable("tests").findOne({
+                foo: {$elemMatch: "bar"}
+            }).success(function (result) {
+                assert.ok(!!result);
+                assert.equal(result._id, object._id);
+                done();
+            });
+        });
+    });
+});
+
+*/

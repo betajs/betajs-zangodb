@@ -52,21 +52,28 @@ Scoped.define("module:ZangoDatabase", [
             },
 
             deleteDatabase: function() {
-                var req = indexedDB.deleteDatabase(this._db);
-                var promise = Promise.create();
-                req.onsuccess = function() {
-                    promise.asyncSuccess(true);
-                };
-                req.onerror = function() {
-                    promise.asyncError("Couldn't delete database");
-                };
-                req.onblocked = function() {
-                    promise.asyncError("Couldn't delete database due to the operation being blocked");
-                };
-                return promise;
+                this._unbind();
+                return this.cls.deleteDatabase(this._db);
             }
 
         };
+
+    }, {
+
+        deleteDatabase: function(db) {
+            var req = indexedDB.deleteDatabase(db);
+            var promise = Promise.create();
+            req.onsuccess = function() {
+                promise.asyncSuccess(true);
+            };
+            req.onerror = function() {
+                promise.asyncError("Couldn't delete database");
+            };
+            req.onblocked = function() {
+                promise.asyncError("Couldn't delete database due to the operation being blocked");
+            };
+            return promise;
+        }
 
     });
 });

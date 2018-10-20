@@ -49,7 +49,9 @@ Scoped.define("module:ZangoDatabaseTable", [
                 result = result.limit(options.limit);
             return Promise.funcCallback(result, result.toArray).mapSuccess(function(cols) {
                 return new ArrayIterator(cols);
-            }, this);
+            }, this).error(function(e) {
+                console.warn(e);
+            });
         },
 
         ensureIndex: function(key) {
