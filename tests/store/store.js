@@ -16,7 +16,7 @@ QUnit.test("zango database store default id", function (assert) {
                     store.remove(object._id).success(function () {
                         store.get(object._id).success(function (result) {
                             assert.equal(result, null);
-                            start();
+                            done();
                         });
                     });
                 });
