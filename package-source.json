@@ -1,63 +1,64 @@
 {
-	"name": "betajs-zangodb",
-	"version": "0.0.2",
-	"description": "BetaJS-ZangoDB is a ZangoDB / IndexedDB wrapper for BetaJS.",
-	"contributors": ["Oliver Friedmann"],
-	"devDependencies": {
-		"lodash": "",
-		"qunitjs": "^2.4.1",
-		"grunt": "",
-		"grunt-contrib-jshint": "",
-		"grunt-contrib-concat": "",
-		"grunt-contrib-uglify": "~2.3.0",
-		"grunt-contrib-clean": "",
-		"grunt-preprocess": "",
-		"grunt-git-revision-count": "",
-		"grunt-closure-tools": "",
-		"grunt-wget": "",
-		"grunt-jsdoc": "",
-		"grunt-shell": "",
-		"grunt-template": "",
-		"grunt-githooks": "",
-		"grunt-contrib-connect": "",
-		"grunt-betajs-docs-compile": "",
-		"betajs-scoped": "~0.0.13",
-		"betajs-compile": "~0.0.28",
-		"js-beautify": ""
-	},
-	"dependencies" : {
-		"betajs": "~1.0.96",
-		"betajs-data": "~1.0.41",
-		"zangodb": "betajs/zangodb#master"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/betajs/betajs-zangodb.git"
-	},
-	"main": "dist/betajs-zangodb.js",
-	"meta": {
-		"guid": "1f4fd098-7b39-4f33-8638-585484cbe503",
-		"installdoc": "docsrc/common/install.md",
-		"summarydoc": "docsrc/common/summary.md",
-		"badges": {
-			"codeclimate": true,
-			"travis": false,
-			"npm": true
-		},
-		"compatability": {
-		},
-		"weakDependencies": {
-			"betajs-scoped": "https://github.com/betajs/betajs-scoped"
-		},
-		"dependencies": {
-			"betajs": "https://github.com/betajs/betajs",
-			"betajs-data": "https://github.com/betajs/betajs-data"
-		},
-		"cdn": {
-			"betajs-zangodb.js": "http://cdn.rawgit.com/betajs/betajs-zangodb/master/dist/betajs-zangodb.js",
-			"betajs-zangodb.min.js": "http://cdn.rawgit.com/betajs/betajs-zangodb/master/dist/betajs-zangodb.min.js",
-			"betajs-zangodb-noscoped.js": "http://cdn.rawgit.com/betajs/betajs-zangodb/master/dist/betajs-zangodb-noscoped.js",
-			"betajs-zangodb-noscoped.min.js": "http://cdn.rawgit.com/betajs/betajs-zangodb/master/dist/betajs-zangodb-noscoped.min.js"
-		}
-	} 
+    "name": "betajs-zangodb",
+    "version": "0.0.3",
+    "description": "BetaJS-ZangoDB is a ZangoDB / IndexedDB wrapper for BetaJS.",
+    "contributors": [
+        "Oliver Friedmann"
+    ],
+    "devDependencies": {
+        "lodash": "",
+        "qunitjs": "^2.4.1",
+        "grunt": "",
+        "grunt-contrib-jshint": "",
+        "grunt-contrib-concat": "",
+        "grunt-contrib-uglify": "~2.3.0",
+        "grunt-contrib-clean": "",
+        "grunt-preprocess": "",
+        "grunt-git-revision-count": "",
+        "grunt-closure-tools": "",
+        "grunt-wget": "",
+        "grunt-jsdoc": "",
+        "grunt-shell": "",
+        "grunt-template": "",
+        "grunt-githooks": "",
+        "grunt-contrib-connect": "",
+        "grunt-betajs-docs-compile": "",
+        "betajs-scoped": "~0.0.13",
+        "betajs-compile": "~0.0.28",
+        "js-beautify": ""
+    },
+    "dependencies": {
+        "betajs": "~1.0.96",
+        "betajs-data": "~1.0.41",
+        "zangodb": "betajs/zangodb#master"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/betajs/betajs-zangodb.git"
+    },
+    "main": "dist/betajs-zangodb.js",
+    "meta": {
+        "guid": "1f4fd098-7b39-4f33-8638-585484cbe503",
+        "installdoc": "docsrc/common/install.md",
+        "summarydoc": "docsrc/common/summary.md",
+        "badges": {
+            "codeclimate": true,
+            "travis": false,
+            "npm": true
+        },
+        "compatability": {},
+        "weakDependencies": {
+            "betajs-scoped": "https://github.com/betajs/betajs-scoped"
+        },
+        "dependencies": {
+            "betajs": "https://github.com/betajs/betajs",
+            "betajs-data": "https://github.com/betajs/betajs-data"
+        },
+        "cdn": {
+            "betajs-zangodb.js": "http://cdn.rawgit.com/betajs/betajs-zangodb/master/dist/betajs-zangodb.js",
+            "betajs-zangodb.min.js": "http://cdn.rawgit.com/betajs/betajs-zangodb/master/dist/betajs-zangodb.min.js",
+            "betajs-zangodb-noscoped.js": "http://cdn.rawgit.com/betajs/betajs-zangodb/master/dist/betajs-zangodb-noscoped.js",
+            "betajs-zangodb-noscoped.min.js": "http://cdn.rawgit.com/betajs/betajs-zangodb/master/dist/betajs-zangodb-noscoped.min.js"
+        }
+    }
 }

@@ -1,5 +1,5 @@
 /*!
-betajs-zangodb - v0.0.2 - 2018-11-12
+betajs-zangodb - v0.0.3 - 2018-11-12
 Copyright (c) Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1006,7 +1006,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-zangodb - v0.0.2 - 2018-11-12
+betajs-zangodb - v0.0.3 - 2018-11-12
 Copyright (c) Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1019,8 +1019,8 @@ Scoped.binding('data', 'global:BetaJS.Data');
 Scoped.define("module:", function () {
 	return {
     "guid": "1f4fd098-7b39-4f33-8638-585484cbe503",
-    "version": "0.0.2",
-    "datetime": 1542035672084
+    "version": "0.0.3",
+    "datetime": 1542036030017
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
