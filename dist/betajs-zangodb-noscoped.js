@@ -1,5 +1,5 @@
 /*!
-betajs-zangodb - v0.0.2 - 2018-10-21
+betajs-zangodb - v0.0.2 - 2018-11-12
 Copyright (c) Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -13,7 +13,7 @@ Scoped.define("module:", function () {
 	return {
     "guid": "1f4fd098-7b39-4f33-8638-585484cbe503",
     "version": "0.0.2",
-    "datetime": 1540075663578
+    "datetime": 1542035672084
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -24,6 +24,9 @@ Scoped.define("module:ZangoDatabaseTable", [
     "base:Iterators.ArrayIterator",
     "base:Tokens"
 ], function(DatabaseTable, Promise, ArrayIterator, Tokens, scoped) {
+
+    var RESERVED_KEYS = ["weak"];
+
     return DatabaseTable.extend({
         scoped: scoped
     }, {
@@ -56,6 +59,26 @@ Scoped.define("module:ZangoDatabaseTable", [
             }).mapSuccess(function() {
                 return row;
             });
+        },
+
+        _encode: function(data) {
+            RESERVED_KEYS.forEach(function(key) {
+                if (key in data) {
+                    data[key + "_reserved"] = data[key];
+                    delete data[key];
+                }
+            });
+            return data;
+        },
+
+        _decode: function(data) {
+            RESERVED_KEYS.forEach(function(key) {
+                if ((key + "_reserved") in data) {
+                    data[key] = data[key + "_reserved"];
+                    delete data[key + "_reserved"];
+                }
+            });
+            return data;
         },
 
         _find: function(query, options) {

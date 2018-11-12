@@ -4,6 +4,9 @@ Scoped.define("module:ZangoDatabaseTable", [
     "base:Iterators.ArrayIterator",
     "base:Tokens"
 ], function(DatabaseTable, Promise, ArrayIterator, Tokens, scoped) {
+
+    var RESERVED_KEYS = ["weak"];
+
     return DatabaseTable.extend({
         scoped: scoped
     }, {
@@ -36,6 +39,26 @@ Scoped.define("module:ZangoDatabaseTable", [
             }).mapSuccess(function() {
                 return row;
             });
+        },
+
+        _encode: function(data) {
+            RESERVED_KEYS.forEach(function(key) {
+                if (key in data) {
+                    data[key + "_reserved"] = data[key];
+                    delete data[key];
+                }
+            });
+            return data;
+        },
+
+        _decode: function(data) {
+            RESERVED_KEYS.forEach(function(key) {
+                if ((key + "_reserved") in data) {
+                    data[key] = data[key + "_reserved"];
+                    delete data[key + "_reserved"];
+                }
+            });
+            return data;
         },
 
         _find: function(query, options) {
