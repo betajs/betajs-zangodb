@@ -2,8 +2,10 @@ Scoped.define("module:ZangoDatabaseTable", [
     "data:Databases.DatabaseTable",
     "base:Promise",
     "base:Iterators.ArrayIterator",
-    "base:Tokens"
-], function(DatabaseTable, Promise, ArrayIterator, Tokens, scoped) {
+    "base:Tokens",
+    "base:Objs",
+    "base:Types"
+], function(DatabaseTable, Promise, ArrayIterator, Tokens, Objs, Types, scoped) {
 
     var RESERVED_KEYS = ["weak"];
 
@@ -42,6 +44,9 @@ Scoped.define("module:ZangoDatabaseTable", [
         },
 
         _encode: function(data) {
+            data = Objs.map(data, function(value) {
+                return value && (Types.is_object(value) || Types.is_array(value)) ? this._encode(value) : value;
+            }, this);
             RESERVED_KEYS.forEach(function(key) {
                 if (key in data) {
                     data[key + "_reserved"] = data[key];
@@ -52,6 +57,9 @@ Scoped.define("module:ZangoDatabaseTable", [
         },
 
         _decode: function(data) {
+            data = Objs.map(data, function(value) {
+                return value && (Types.is_object(value) || Types.is_array(value)) ? this._decode(value) : value;
+            }, this);
             RESERVED_KEYS.forEach(function(key) {
                 if ((key + "_reserved") in data) {
                     data[key] = data[key + "_reserved"];

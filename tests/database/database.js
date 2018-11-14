@@ -60,3 +60,23 @@ QUnit.test("zango database $elemMatch test", function (assert) {
         });
     });
 });
+
+
+QUnit.test("zango database $and test", function (assert) {
+    var done = assert.async();
+    var db = new BetaJS.Data.Databases.Zango.ZangoDatabase("betajszangodb");
+    db.getTable("tests").clear().success(function () {
+        db.getTable("tests").insertRow({foo: "barbaz"}).success(function (object) {
+            db.getTable("tests").findOne({
+                $and: [{
+                    foo: {$regex: /arb/}
+                }, {
+                    foo: {$regex: /rba/}
+                }]
+            }).success(function (result) {
+                assert.equal(result._id, object._id);
+                done();
+            });
+        });
+    });
+});

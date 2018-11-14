@@ -1,5 +1,5 @@
 /*!
-betajs-zangodb - v0.0.3 - 2018-11-12
+betajs-zangodb - v0.0.4 - 2018-11-14
 Copyright (c) Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -12,8 +12,8 @@ Scoped.binding('data', 'global:BetaJS.Data');
 Scoped.define("module:", function () {
 	return {
     "guid": "1f4fd098-7b39-4f33-8638-585484cbe503",
-    "version": "0.0.3",
-    "datetime": 1542036030017
+    "version": "0.0.4",
+    "datetime": 1542229962482
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -22,8 +22,10 @@ Scoped.define("module:ZangoDatabaseTable", [
     "data:Databases.DatabaseTable",
     "base:Promise",
     "base:Iterators.ArrayIterator",
-    "base:Tokens"
-], function(DatabaseTable, Promise, ArrayIterator, Tokens, scoped) {
+    "base:Tokens",
+    "base:Objs",
+    "base:Types"
+], function(DatabaseTable, Promise, ArrayIterator, Tokens, Objs, Types, scoped) {
 
     var RESERVED_KEYS = ["weak"];
 
@@ -62,6 +64,9 @@ Scoped.define("module:ZangoDatabaseTable", [
         },
 
         _encode: function(data) {
+            data = Objs.map(data, function(value) {
+                return value && (Types.is_object(value) || Types.is_array(value)) ? this._encode(value) : value;
+            }, this);
             RESERVED_KEYS.forEach(function(key) {
                 if (key in data) {
                     data[key + "_reserved"] = data[key];
@@ -72,6 +77,9 @@ Scoped.define("module:ZangoDatabaseTable", [
         },
 
         _decode: function(data) {
+            data = Objs.map(data, function(value) {
+                return value && (Types.is_object(value) || Types.is_array(value)) ? this._decode(value) : value;
+            }, this);
             RESERVED_KEYS.forEach(function(key) {
                 if ((key + "_reserved") in data) {
                     data[key] = data[key + "_reserved"];
