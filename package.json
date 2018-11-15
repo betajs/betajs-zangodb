@@ -15,7 +15,7 @@
         "url": "https://github.com/betajs/betajs-zangodb/issues"
     },
     "name": "betajs-zangodb",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "BetaJS-ZangoDB is a ZangoDB / IndexedDB wrapper for BetaJS.",
     "contributors": [
         "Oliver Friedmann"
