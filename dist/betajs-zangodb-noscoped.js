@@ -1,5 +1,5 @@
 /*!
-betajs-zangodb - v0.0.5 - 2018-11-15
+betajs-zangodb - v0.0.6 - 2019-11-07
 Copyright (c) Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -12,8 +12,8 @@ Scoped.binding('data', 'global:BetaJS.Data');
 Scoped.define("module:", function () {
 	return {
     "guid": "1f4fd098-7b39-4f33-8638-585484cbe503",
-    "version": "0.0.5",
-    "datetime": 1542298583721
+    "version": "0.0.6",
+    "datetime": 1573185825692
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -92,9 +92,9 @@ Scoped.define("module:ZangoDatabaseTable", [
         _find: function(query, options) {
             var result = this.table().find(query);
             options = options || {};
-            if ("sort" in options)
+            if (options.sort)
                 result = result.sort(options.sort);
-            if ("skip" in options)
+            if (options.skip)
                 result = result.skip(options.skip);
             if (options.limit)
                 result = result.limit(options.limit);

@@ -72,9 +72,9 @@ Scoped.define("module:ZangoDatabaseTable", [
         _find: function(query, options) {
             var result = this.table().find(query);
             options = options || {};
-            if ("sort" in options)
+            if (options.sort)
                 result = result.sort(options.sort);
-            if ("skip" in options)
+            if (options.skip)
                 result = result.skip(options.skip);
             if (options.limit)
                 result = result.limit(options.limit);

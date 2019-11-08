@@ -15,7 +15,7 @@
         "url": "https://github.com/betajs/betajs-zangodb/issues"
     },
     "name": "betajs-zangodb",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "BetaJS-ZangoDB is a ZangoDB / IndexedDB wrapper for BetaJS.",
     "contributors": [
         "Oliver Friedmann"
@@ -26,7 +26,7 @@
         "grunt": "",
         "grunt-contrib-jshint": "",
         "grunt-contrib-concat": "",
-        "grunt-contrib-uglify": "~2.3.0",
+        "grunt-contrib-uglify": "^4.0.0",
         "grunt-contrib-clean": "",
         "grunt-preprocess": "",
         "grunt-git-revision-count": "",
@@ -41,6 +41,11 @@
         "betajs-scoped": "~0.0.13",
         "betajs-compile": "~0.0.28",
         "js-beautify": ""
+    },
+    "scripts": {
+        "test": "grunt check-node",
+        "relink": "npm link betajs && npm link betajs-compile && npm link betajs-scoped && npm link betajs-data",
+        "reinstall": "rm -f package-lock.json && rm -rf node_modules && npm i && npm run relink"
     },
     "dependencies": {
         "betajs": "~1.0.96",
